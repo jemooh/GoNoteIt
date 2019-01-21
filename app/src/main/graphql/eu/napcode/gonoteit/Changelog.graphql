@@ -1,0 +1,24 @@
+mutation GetChangelog($timestamp: Int!) {
+    changelog(timestamp: $timestamp) {
+       created {
+        uuid,
+        id,
+        type,
+        data,
+        updatedAt,
+        readAccess,
+        writeAccess
+       },
+       updated {
+        uuid,
+        id,
+        type,
+        data,
+        updatedAt
+        readAccess,
+        writeAccess
+       },
+       deleted,
+       timestamp
+     }
+}

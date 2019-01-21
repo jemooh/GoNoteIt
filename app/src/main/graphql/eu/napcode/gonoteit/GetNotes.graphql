@@ -1,0 +1,63 @@
+query GetNotesQuery {
+    allEntities {
+       type,
+       data,
+       id,
+       uuid,
+       updatedAt,
+       readAccess,
+       writeAccess
+     },
+    timestamp
+}
+
+query GetNoteByIdQuery($id: Int!) {
+    entity(id : $id) {
+        type,
+        data,
+        id,
+        uuid,
+        updatedAt,
+        readAccess,
+        writeAccess
+    }
+}
+
+
+query FilterHarvestsQuery ($collection_center_id: String!,$harvest_date: String!,$per_page: Int!,$page: Int!){
+ harvests(filter: {collection_center_id: $collection_center_id, harvest_date: $harvest_date}, page: $page, per_page: $per_page) {
+    edges {
+          node {
+            harvest_id
+            farm_id
+            collection_center_id
+            product_id
+            harvest_date
+            quantity
+            unit_of_measure_id
+            receipt_number
+            receipt_url
+            unit_price
+            weight
+            total_payable
+            harvested_by
+          }
+        }
+        page_info {
+          total_count
+          per_page
+          has_next
+        }
+      }
+
+  {"query":"query FilterHarvestsQuery($page: Int!, $per_page: Int!, $collection_center_id: String)
+  {  harvests(page: $page, per_page: $per_page, filter: {collection_center_id: $collection_center_id})
+  {    __typename    edges {      __typename      node {        __typename        harvest_id        farm_id        collection_center_id        product_id        harvest_date        quantity        unit_of_measure_id        receipt_number        receipt_url        unit_price        weight        total_payable        harvested_by      }    }    page_info {      __typename      total_count      per_page      has_next    }  }}",
+  "operationName":"FilterHarvestsQuery","variables":{"page":1,"per_page":20,"collection_center_id":"4ddf67fa-a554-47aa-add6-4caac99ee463"}}
+
+
+ {"data":{"harvests":{"__typename":"HarvestGQLConnection","edges":[],"page_info":{"__typename":"PaginatorInfo","has_next":false,"per_page":20,"total_count":0}}}}
+
+
+
+}
